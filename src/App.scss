@@ -1,0 +1,11 @@
+.App {
+  // &__container {
+  //   width: 1170px;
+  //   margin: 0 auto;
+  // }
+  
+  &__main {
+    padding: 60px calc(50% - #{1170px / 2});
+  }
+  
+}
