@@ -30,7 +30,7 @@ export const Header = () => {
               <a 
                 href="#" 
                 className="header__logo"
-                onClick={() => setIsActive(false)}    
+                onClick={() => setIsActive(false)}
               >
                 <img src={logo} alt="logo" className="header__logo-img"/>
               </a>

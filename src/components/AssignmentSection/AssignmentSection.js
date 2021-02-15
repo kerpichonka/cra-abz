@@ -20,7 +20,7 @@ export const AssignmentSection = () => {
         </p>
         
         <button className="assignment__button">
-          Sing up now
+          sign up now
         </button>
       </div>
     </section>

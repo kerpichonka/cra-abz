@@ -2,18 +2,41 @@ import axios from 'axios';
 
 const BASE_URL = 'https://frontend-test-assignment-api.abz.agency/api/v1'
 
-export const getUsers = ({ count = 10, link } = {}) => {
-  let url  = link ? link : `${BASE_URL}/users?count=${count}`
+const getUsers = ({ count = 6, link } = {}) => {
+  let url  = link ? link : `${BASE_URL}/users?count=${count}`;
   return axios.get(url)
-  // if (link) {
-  //   return axios.get(link);
-  // }
-
-  // return axios.get(`${BASE_URL}/users?count=${count}`);
 }
 
+const getPositions = () => {
+  return axios.get(`${BASE_URL}/positions`)
+}
 
-export const getImage = ({id, url}) => {
-  console.log(url)
-  return axios.get(url).catch(err => ({error: true, id}))
+const getToken = () => {
+  return axios.get(`${BASE_URL}/token`).then(response => response.data.token)
+}
+
+ 
+const registerUser = ({user, token }) => {
+  var formData = new FormData(); 
+
+  formData.append('position_id', user.position);
+  formData.append('name', user.name);
+  formData.append('email', user.email);
+  formData.append('phone', user.phone);
+  formData.append('photo', user.photo);
+
+  return axios.post(`${BASE_URL}/users`, formData, 
+    {
+      headers: {
+        'Token': token
+      },
+    }
+  )
+}
+
+export default {
+  getUsers,
+  getPositions,
+  getToken,
+  registerUser
 }

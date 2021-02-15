@@ -1,50 +1,50 @@
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
+import { UserCard } from './components/UserCard';
+import testApi from '../../api/testApi'; 
 import './UsersSection.scss';
-import { getUsers, getImage } from '../../api/testApi'; 
 
+
+
+// setUsers([registeredUser, ...users])
 export const UsersSection = () => {
   const [users, setUsers] = useState([]);
   const [nextLink, setNextLink] = useState('');
   const [allUsersFetched, setAllUsersFetched] = useState(false);
 
+  const getUsers = (link) => {
+    const payload = { count: 6 }
+    
+    if (link) {
+      payload.link = link
+    }
 
-  useEffect(() => {
-    getUsers()
-      .then(({ data }) => {
+    testApi.getUsers(payload).then(({data}) => {
+      const updatedUsers = [...users, ...data.users];
+      updatedUsers.sort((a, b) => b.registration_timestamp - a.registration_timestamp)
+      setUsers(updatedUsers);
+    
+      setNextLink(data.links.next_url)
+      
+      if(updatedUsers.length === data.total_users) {
+        setAllUsersFetched(true);
+      }
+    })
+  }
 
-        data.users.forEach(user => {
-          getImage({id: user.id, url: user.photo})
-        });
+  useEffect(getUsers, [])
 
-
-        const users = [...data.users]
-        users.sort((a, b) => b.registration_timestamp - a.registration_timestamp)
-        setUsers(users);
-        console.log(data)
-        setNextLink(data.links.next_url)
-        if(users.length === data.total_users) {
-          setAllUsersFetched(true);
-        }
-      })
-  }, [])
   return (
     <section className="users">
-      <h2>
+      <h2 className="users__title">
         Our cheerful users
       </h2>
-      <p>
+      <p className="users__mark">
         Attention! Sorting users by registration date
       </p>
       <div className="users__cards">
         {users && users.map(user => (
-          <div key={user.id} className="users__card">
-            <img src={user.photo} alt="user icon" ></img>
-            <p>{user.name}</p>
-            <p>{user.position}</p>
-            <a href={`mailto:${user.email}`}>{user.email}</a>
-            <a href={`tel:${user.phone}`}>{user.phone}</a>
-          </div>
+          <UserCard key={user.id} user={user} />
         ))}
       </div>
 
@@ -52,43 +52,7 @@ export const UsersSection = () => {
         type="button" 
         className={classNames("users__button", {"users__button--hidden": allUsersFetched})}
         onClick={() => {
-          getUsers({ link: nextLink })
-            .then(({ data }) => {
-              // setUsers( users => )
-
-              // add users to prev users
-              const newUsers = [...users, ...data.users];
-
-              newUsers.forEach(user => {
-                getImage({id: user.id, url: user.photo}).then(data => {
-                  if (data.error) {
-
-                    const userWithBrokenImage = newUsers.find(u => u.id === data.id)
-                    userWithBrokenImage.photo = '../../images/user-icon.png'
-
-                    console.log(users)
-                    console.log(userWithBrokenImage)
-                  }
-                })
-              });
-
-              
-              // S O R T
-              newUsers.sort((a, b) => b.registration_timestamp - a.registration_timestamp)
-              setUsers(newUsers);
-              setNextLink(data.links.next_url)
-              // SET users
-
-              
-       
-
-
-
-              if(newUsers.length === data.total_users) {
-                setAllUsersFetched(true);
-              }
-              // set nextLINK
-            })
+          getUsers(nextLink)
         }}
         >
           Show more

@@ -1,0 +1,75 @@
+.registration {
+
+  &__title{
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  &__mark {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.input--error {
+  outline: none;
+  border: 2px solid red;
+}
+
+.file {
+  display: flex;
+
+  user-select: none;
+  position: relative;
+}
+
+.file-label {
+  align-items: stretch;
+  display: flex;
+  cursor: pointer;
+  justify-content: flex-start;
+  overflow: hidden;
+  position: relative;
+}
+
+.file-input {
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  outline: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.file-cta {
+  border-color: #dbdbdb;
+  border-radius: 0.375em;
+  font-size: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+  white-space: nowrap;
+  background-color: #f5f5f5;
+  color: #4a4a4a;
+}
+
+.file-name,
+.file-cta {
+  -webkit-appearance: none;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 0.375em;
+  box-shadow: none;
+  display: inline-flex;
+  font-size: 1rem;
+  height: 2.5em;
+  justify-content: flex-start;
+  line-height: 1.5;
+  position: relative;
+}
+

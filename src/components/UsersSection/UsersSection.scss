@@ -1,18 +1,30 @@
 .users {
-  padding: 105px 0 115px 30px;
+  padding: 105px 30px 115px;
+
+  &__title{
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  &__mark {
+    text-align: center;
+    margin-bottom: 50px;
+  }
 
   &__cards {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 350px);
     grid-gap: 30px;
   }
+
 
   &__button {
     display: block;
     margin: 0 auto;
 
     &--hidden {
-      display: none;
+      // display: none;
+      transform: scale(0);
     }
   }
 }
