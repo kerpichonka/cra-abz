@@ -5,7 +5,7 @@ import { validateName, validateEmail, validateFile, validatePhone } from '../../
 import classNames from 'classnames';
 import './RegistrationSection.scss';
 
-export const RegistrationSection = () => {
+export const RegistrationSection = ({ addUser }) => {
   const [name, setName] = useState('');
   const [isNameValid, setIsNameValid] = useState(true);
 
@@ -24,8 +24,6 @@ export const RegistrationSection = () => {
   const [isFormDirty, setIsFormDirty] = useState(false)
 
   useEffect(() => {
-
-
     testApi.getPositions()
       .then(({data}) => {
         setPosition(data.positions)
@@ -48,7 +46,7 @@ export const RegistrationSection = () => {
     setIsPhoneValid(validPhone);
 
     const validFile = await validateFile(file)
-    setIsFileValid(validFile)
+    setIsFileValid(validFile);
 
     if (!validName || !validEmail || !validPhone || !validFile)
       return;
@@ -64,10 +62,11 @@ export const RegistrationSection = () => {
     }
 
     testApi.registerUser({token, user}).then(response => {
+      console.log(user);
+      console.log(response);
+      // addUser(response);
 
-      // addUser(user)
-
-      console.log(response.data)
+      
     })
    
     // const user = {
@@ -179,8 +178,8 @@ export const RegistrationSection = () => {
                 }
               }}
             />
-            <span class="file-name">{file? file.name : 'Upload your photo'}</span>
-            <span class="file-cta"> Browse </span>
+            <span className="file-name">{file? file.name : 'Upload your photo'}</span>
+            <span className="file-cta"> Browse </span>
           </label>
         </div>
         {!isFileValid && <p>Error</p>}

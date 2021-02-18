@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Header } from './components/Header/Header'
 import { AssignmentSection } from './components/AssignmentSection/AssignmentSection';
 import { AcquaintedSection } from './components/AcquaintedSection/AcquaintedSection';
@@ -10,11 +10,13 @@ import './App.scss';
 
 function App() {
 
-  // users, setUsers
+  const [users, setUsers] = useState([]);
+  console.log(users);
 
-  // const addUser = (user) => {
-  //   setUsers([user, ...users])
-  // }
+  const addUser = (user) => {
+    console.log(users)
+    setUsers([user, ...users])
+  }
 
   return (
     <div className="App">
@@ -23,8 +25,8 @@ function App() {
         <main className="App__main">
           <AssignmentSection />
           <AcquaintedSection />
-          <UsersSection  />
-          <RegistrationSection  />
+          <UsersSection users={users} setUsers={setUsers} />
+          <RegistrationSection addUser={addUser} />
           
           {/* <AssignmentSection />
           <AcquaintedSection />

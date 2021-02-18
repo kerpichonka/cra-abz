@@ -7,8 +7,8 @@ import './UsersSection.scss';
 
 
 // setUsers([registeredUser, ...users])
-export const UsersSection = () => {
-  const [users, setUsers] = useState([]);
+export const UsersSection = ({ users, setUsers}) => {
+  // const [users, setUsers] = useState([]);
   const [nextLink, setNextLink] = useState('');
   const [allUsersFetched, setAllUsersFetched] = useState(false);
 
@@ -43,7 +43,7 @@ export const UsersSection = () => {
         Attention! Sorting users by registration date
       </p>
       <div className="users__cards">
-        {users && users.map(user => (
+        {users.length > 0 && users.map(user => (
           <UserCard key={user.id} user={user} />
         ))}
       </div>

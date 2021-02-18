@@ -1,8 +1,19 @@
 .card-user {
+  width: 205px;
+  text-align: center;
+
+  &__name {
+    word-wrap: break-word;
+  }
+
   &__email {
     display: block;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  &__icon {
+    border-radius: 50%;
   }
 }

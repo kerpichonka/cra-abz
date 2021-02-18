@@ -13,7 +13,7 @@ export const Header = () => {
   return (
   <header className="header">
     <div className="header__body">
-      <a href="#" className={classNames("header__logo", {"header__logo--active": isActive})}>
+      <a href="#" className={classNames("header__logo", {"header__logo--disable": isActive})}>
         <img src={logo} alt="logo" className="header__logo-img"/>
       </a>
       <nav className="header__nav">
@@ -26,10 +26,10 @@ export const Header = () => {
           </ul>
 
           <div className={classNames("header__menu-container", {"header__menu-container--active": isActive})}>
-            <div className="header__menu-nav">
+            <div className={classNames("header__menu-nav", {"header__menu-nav--active": isActive})}>
               <a 
                 href="#" 
-                className="header__logo"
+                className={classNames("header__logo", {"header__logo--active": isActive})}
                 onClick={() => setIsActive(false)}
               >
                 <img src={logo} alt="logo" className="header__logo-img"/>

@@ -3,7 +3,7 @@ import './UserCard.scss';
 
 export const UserCard = ({ user }) => {
   const changeUserIcon = (event) => {
-    event.target.src = require('../../../images/user-icon.png').default
+    event.target.src = require('../../../images/photo-cover.png').default
   }
   
   return (
