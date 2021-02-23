@@ -10,9 +10,9 @@ export const UserCard = ({ user }) => {
     <div key={user.id} className="card-user">
       <img 
         src= {user.photo}
-        onLoad={(evt) => {
-          console.log(evt.target.height)
-        }}
+        // onLoad={(evt) => {
+        //   console.log(evt.target.height)
+        // }}
         alt="user icon"
         className="card-user__icon"
         onError={changeUserIcon}

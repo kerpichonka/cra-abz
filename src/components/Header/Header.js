@@ -17,7 +17,7 @@ export const Header = () => {
         <img src={logo} alt="logo" className="header__logo-img"/>
       </a>
       <nav className="header__nav">
-          <ul className="header__nav-list">
+          <ul className="header__list">
             {list.map(item => (
               <li key={item} className="header__nav-item">
                 <a href="#">{item}</a>
@@ -27,21 +27,27 @@ export const Header = () => {
 
           <div className={classNames("header__menu-container", {"header__menu-container--active": isActive})}>
             <div className={classNames("header__menu-nav", {"header__menu-nav--active": isActive})}>
-              <a 
-                href="#" 
-                className={classNames("header__logo", {"header__logo--active": isActive})}
-                onClick={() => setIsActive(false)}
-              >
-                <img src={logo} alt="logo" className="header__logo-img"/>
-              </a>
+              <div className="header__logo-wrapper">
+                <a 
+                  href="#" 
+                  className={classNames("header__logo", {"header__logo--active": isActive})}
+                  onClick={() => setIsActive(false)}
+                >
+                  <img src={logo} alt="logo" className="header__logo-img"/>
+                </a>
+              </div>
               <ul className="header__menu-list">
                 {mobileList.map(item => (
                   <li
                     key={item}
                     className="header__menu-item"
-                    onClick={() => setIsActive(false)}
                   >
-                    <a href="#">{item}</a>
+                    <a 
+                      href="#" 
+                      className="header__menu-link"
+                      onClick={() => setIsActive(false)}
+                    >
+                      {item}</a>
                   </li>
                 ))}
               </ul>

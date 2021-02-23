@@ -19,9 +19,9 @@ export const AssignmentSection = () => {
           The photo has to scale in the banner area on the different screens
         </p>
         
-        <button className="assignment__button">
-          sign up now
-        </button>
+        <a href="#registration" className="assignment__button">
+          Sign up now
+        </a>
       </div>
     </section>
   );

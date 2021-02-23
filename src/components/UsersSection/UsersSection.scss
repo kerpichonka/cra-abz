@@ -17,10 +17,10 @@
 
   &__cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(288px, 1fr));
+    grid-template-columns: repeat(3, minmax(205px, 350px));
     justify-content: center;
     justify-items: center;
-    // grid-gap: 30px;
+    grid-gap: 30px;
     margin-bottom: 100px;
   }
 
@@ -28,9 +28,16 @@
   &__button {
     display: block;
     margin: 0 auto;
+    height: 40px;
+    width: 210px;
+    font-size: 16px;
+    color: white;
+    background-color: #EF5B4C;
+    border-radius: 5px;
+    border-width: 0;
+    cursor: pointer;
 
     &--hidden {
-      // display: none;
       transform: scale(0);
     }
   }

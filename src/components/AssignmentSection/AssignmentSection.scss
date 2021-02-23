@@ -36,12 +36,14 @@
   }
 
   &__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 40px;
     width: 210px;
     font-size: 16px;
     color: inherit;
     background-color: #EF5B4C;
     border-radius: 5px;
-    border-width: 0;
   }
 }

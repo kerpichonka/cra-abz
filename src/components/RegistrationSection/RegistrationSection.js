@@ -81,7 +81,7 @@ export const RegistrationSection = ({ addUser }) => {
   }
 
   return (
-    <section className="registration">
+    <section className="registration" id="registration">
       <h2 className="registration__title">Register to get a work</h2>
       <p className="registration__mark">
         Attention! After succesful registration and alert, update
@@ -184,7 +184,7 @@ export const RegistrationSection = ({ addUser }) => {
         </div>
         {!isFileValid && <p>Error</p>}
 
-        <button type="submit">Sign up now</button>
+        <button type="submit" className="registration__button">Sign up now</button>
       </form>
     </section>);
 }

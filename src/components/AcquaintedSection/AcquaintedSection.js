@@ -27,7 +27,7 @@ export const AcquaintedSection = () => {
             (gulp/webpack) you will get bounu points as well. Slice service directory 
             page PSD mockup into HTML5/CSS3.
           </p>
-          <a href="#" className="acquainted__link">sign up now</a>
+          <a href="#registration" className="acquainted__link">Sign up now</a>
         </div>
 
       </div>
