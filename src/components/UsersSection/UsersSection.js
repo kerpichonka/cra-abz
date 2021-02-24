@@ -8,28 +8,23 @@ import './UsersSection.scss';
 
 // setUsers([registeredUser, ...users])
 export const UsersSection = ({ users, setUsers}) => {
-  // const [users, setUsers] = useState([]);
-  const [nextLink, setNextLink] = useState('');
+
   const [allUsersFetched, setAllUsersFetched] = useState(false);
 
-  const getUsers = (link) => {
-    const payload = { count: 6 }
+  const getUsers = () => {
+    const payload = { count: 6, offset: users.length}
     
-    if (link) {
-      payload.link = link
-    }
+    testApi.getUsers(payload)
+      .then(({data}) => {
+        const updatedUsers = [...users, ...data.users];
 
-    testApi.getUsers(payload).then(({data}) => {
-      const updatedUsers = [...users, ...data.users];
-      updatedUsers.sort((a, b) => b.registration_timestamp - a.registration_timestamp)
-      setUsers(updatedUsers);
-    
-      setNextLink(data.links.next_url)
-      
-      if(updatedUsers.length === data.total_users) {
-        setAllUsersFetched(true);
-      }
-    })
+        updatedUsers.sort((a, b) => b.registration_timestamp - a.registration_timestamp)
+        setUsers(updatedUsers);
+        
+        if(updatedUsers.length === data.total_users) {
+          setAllUsersFetched(true);
+        }
+      })
   }
 
   useEffect(getUsers, [])
@@ -51,22 +46,10 @@ export const UsersSection = ({ users, setUsers}) => {
       <button 
         type="button" 
         className={classNames("users__button", {"users__button--hidden": allUsersFetched})}
-        onClick={() => {
-          getUsers(nextLink)
-        }}
+        onClick={getUsers}
         >
           Show more
         </button>
     </section>
   )
 }
-
-
-// email: "onie34@lubowitz.com"
-// id: 1
-// name: "Leanne West"
-// phone: "+380936050764"
-// photo: "https://frontend-test-assignment-api.abz.agency/images/users/5fa2a6596d3bb1.jpeg"
-// position: "Content manager"
-// position_id: 2
-// registration_timestamp: 1604494937

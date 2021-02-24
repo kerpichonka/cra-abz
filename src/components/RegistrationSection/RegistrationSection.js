@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import testApi from '../../api/testApi';
 import { validateName, validateEmail, validateFile, validatePhone } from '../../services/validationService'
+import iconClose from '../../images/icon-close.png'
 
 import classNames from 'classnames';
 import './RegistrationSection.scss';
@@ -11,6 +12,7 @@ export const RegistrationSection = ({ addUser }) => {
 
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isExistingEmail, setIsExistingEmail] = useState(false)
 
   const [phone, setPhone] = useState('');
   const [isPhoneValid, setIsPhoneValid] = useState(true);
@@ -21,11 +23,18 @@ export const RegistrationSection = ({ addUser }) => {
   const [positions, setPosition] = useState([]);
   const [selectedPosition, setSelectedPosition] = useState(0);
   
-  const [isFormDirty, setIsFormDirty] = useState(false)
+  const [isFormDirty, setIsFormDirty] = useState(false);
+
+  const [isValidForm, setIsValidForm] = useState(false);
+
+  // const [isModalClosed, setIsModalClosed] = useState(false);
+
+  const [errorText, setErrorText] = useState('')
 
   useEffect(() => {
     testApi.getPositions()
       .then(({data}) => {
+        console.log(data.positions)
         setPosition(data.positions)
         setSelectedPosition(data.positions[0].id)
       })
@@ -51,33 +60,36 @@ export const RegistrationSection = ({ addUser }) => {
     if (!validName || !validEmail || !validPhone || !validFile)
       return;
 
-    const token = await testApi.getToken()
+    const token = await testApi.getToken();
 
     const user = {
       name,
       email,
       phone,
       photo: file,
-      position: selectedPosition
+      position: selectedPosition,
     }
 
-    testApi.registerUser({token, user}).then(response => {
-      console.log(user);
-      console.log(response);
-      // addUser(response);
+    testApi.registerUser({token, user})
+      .then(({data}) => {
+        console.log(data)
+        const user = {
+          id: data.user_id,
+          name,
+          email,
+          phone,
+          photo: URL.createObjectURL(file),
+          position: positions[selectedPosition - 1].name,
+        };
 
-      
-    })
-   
-    // const user = {
-    //   name,
-    //   email,
-    //   phone,
-    //   file,
-    //   position: selectedPosition
-    // }
-
-    // testApi.registerUser({token, user})
+        setIsValidForm(true);
+        setIsExistingEmail(false);
+        addUser(user);
+      })
+      .catch(error => {
+        setErrorText(error.response.data.message)
+        setIsExistingEmail(true);
+      })
   }
 
   return (
@@ -105,7 +117,7 @@ export const RegistrationSection = ({ addUser }) => {
 
           }}
         />
-        {!isNameValid && <p>Error</p>}
+        {!isNameValid && <p className="registration__mark--error">More than 2 characters</p>}
 
         <label htmlFor="email" className="registration__label">Email</label>
         <input 
@@ -123,7 +135,7 @@ export const RegistrationSection = ({ addUser }) => {
             }
           }}
         />
-        {!isEmailValid && <p>Error</p>}
+        {!isEmailValid && <p className="registration__mark--error">Invalid email</p>}
 
 
         <label htmlFor="phone" className="registration__label">Phone number</label>
@@ -142,9 +154,9 @@ export const RegistrationSection = ({ addUser }) => {
             }
           }}
         />
-        {!isPhoneValid && <p>Error</p>}
+        {!isPhoneValid && <p className="registration__mark--error">The phone number is not in the correct format</p>}
         <small className="registration__phone-mark">Enter a phone number in international format</small>
-        
+
         <p className="registration__position">Select your position</p>
         {positions.length > 0 && positions.map(position => (
           <label key={position.id} htmlFor={position.id}>
@@ -184,29 +196,80 @@ export const RegistrationSection = ({ addUser }) => {
               <span className="registration__file-cta"> Browse </span>
             </div>
           </label>
-          {!isFileValid && <p>Error</p>}
+          {!isFileValid &&
+            <div>
+              <p className="registration__mark--error">The photo size must not be greater than 5 Mb.</p>
+              <p className="registration__mark--error">Minimum size of photo 70x70</p>
+            </div>
+          }
         </div>
         
-
         <button type="submit" className="registration__button">Sign up now</button>
       </form>
+
+      {isValidForm && (
+        <div className="registration__success-window">
+          <div className="registration__modal">
+
+            <div className="registration__button-wrapper">
+              <strong className="registration__button-title">Congratulations</strong>
+              <button 
+                className="registration__button-close"
+                onClick={() => {
+                  setIsValidForm(false)
+                }}
+              >
+                <img 
+                  src={iconClose} 
+                  className="registration__image-close"
+                  alt="button close" />
+              </button>
+            </div>
+
+            <p className="registration__modal-text">You have succesfully passed the registration</p>
+            <button 
+              className="registration__button-success"
+              onClick={() => {
+                setIsValidForm(false)
+              }}
+            >
+              Great
+            </button>
+          </div>
+        </div>
+      )}
+
+      {isExistingEmail && (
+        <div className="registration__success-window">
+          <div className="registration__modal">
+
+            <div className="registration__button-wrapper">
+              <strong className="registration__button-title">Something wrong</strong>
+              <button 
+                className="registration__button-close"
+                onClick={() => {
+                  setIsExistingEmail(false)
+                }}
+              >
+                <img 
+                  src={iconClose} 
+                  className="registration__image-close"
+                  alt="button close" />
+              </button>
+            </div>
+
+            <p className="registration__modal-text">{errorText}</p>
+            <button 
+              className="registration__button-success"
+              onClick={() => {
+                setIsExistingEmail(false)
+              }}
+            >
+              Change
+            </button>
+          </div>
+        </div>
+      )}
+
     </section>);
 }
-
-
-/*
-
-  const submitForm = () => {
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("file", selectedFile);
-
-    axios
-      .post(UPLOAD_URL, formData)
-      .then((res) => {
-        alert("File Upload success");
-      })
-      .catch((err) => alert("File Upload Error"));
-  };
-
-*/

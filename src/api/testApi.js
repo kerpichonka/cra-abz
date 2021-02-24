@@ -2,10 +2,12 @@ import axios from 'axios';
 
 const BASE_URL = 'https://frontend-test-assignment-api.abz.agency/api/v1'
 
-const getUsers = ({ count = 6, link } = {}) => {
-  let url  = link ? link : `${BASE_URL}/users?count=${count}`;
-  return axios.get(url)
+
+const getUsers = ({ offset, count } = {}) => {
+  return axios.get(`${BASE_URL}/users?count=${count}&offset=${offset}`)
 }
+
+
 
 const getPositions = () => {
   return axios.get(`${BASE_URL}/positions`)

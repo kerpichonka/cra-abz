@@ -38,7 +38,7 @@
     cursor: pointer;
 
     &--hidden {
-      transform: scale(0);
+      display: none;
     }
   }
 }

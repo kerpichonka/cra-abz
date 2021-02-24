@@ -9,12 +9,9 @@ import './App.scss';
 
 
 function App() {
-
   const [users, setUsers] = useState([]);
-  console.log(users);
 
   const addUser = (user) => {
-    console.log(users);
     setUsers([user, ...users])
   }
 
@@ -27,13 +24,11 @@ function App() {
           <AcquaintedSection />
           <UsersSection users={users} setUsers={setUsers} />
           <RegistrationSection addUser={addUser} />
-          
-          {/* <AssignmentSection />
-          <AcquaintedSection />
-          <UsersSection users setUsers />
-          <RegistrationSection addUser /> */}
         </main>
-
+        
+        <footer className="App__footer">
+          <p className="App__footer-paragraph">&#169;abz.agency specially for the test task</p>
+        </footer> 
     </div>
   );
 }
