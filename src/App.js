@@ -14,7 +14,7 @@ function App() {
   console.log(users);
 
   const addUser = (user) => {
-    console.log(users)
+    console.log(users);
     setUsers([user, ...users])
   }
 

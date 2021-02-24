@@ -89,12 +89,12 @@ export const RegistrationSection = ({ addUser }) => {
       </p>
       <form className="registration__form" onSubmit={registerUser}>
 
-        <label htmlFor="name">Name</label>
+        <label htmlFor="name" className="registration__label">Name</label>
         <input 
           type="text"
           id="name"
           name="name"
-          className={classNames({"input--error": !isNameValid})}
+          className={classNames("registration__input", {"registration__input--error": !isNameValid})}
           value={name}
           placeholder="Your name"
           onChange={(event) => {
@@ -107,12 +107,13 @@ export const RegistrationSection = ({ addUser }) => {
         />
         {!isNameValid && <p>Error</p>}
 
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email" className="registration__label">Email</label>
         <input 
           type="text"
           name="email"
           id="email"
           placeholder="Your email"
+          className={classNames("registration__input", {"registration__input--error": !isEmailValid})}
           value={email}
           onChange={(event) => {
             setEmail(event.target.value)
@@ -125,13 +126,14 @@ export const RegistrationSection = ({ addUser }) => {
         {!isEmailValid && <p>Error</p>}
 
 
-        <label htmlFor="phone">Phone number</label>
+        <label htmlFor="phone" className="registration__label">Phone number</label>
         <input 
           type="text"
           name="phone"
           id="phone"
           value={phone}
-          placeholder="+380 XX XXX XX XX"
+          placeholder="+380XXXXXXXXX"
+          className={classNames("registration__input", {"registration__input--error": !isPhoneValid})}
           onChange={(event) => {
             setPhone(event.target.value);
 
@@ -140,11 +142,10 @@ export const RegistrationSection = ({ addUser }) => {
             }
           }}
         />
-
-        <p><small>Enter a phone number in international format</small></p>
         {!isPhoneValid && <p>Error</p>}
-
-        <p>Select your position</p>
+        <small className="registration__phone-mark">Enter a phone number in international format</small>
+        
+        <p className="registration__position">Select your position</p>
         {positions.length > 0 && positions.map(position => (
           <label key={position.id} htmlFor={position.id}>
             <input 
@@ -160,11 +161,11 @@ export const RegistrationSection = ({ addUser }) => {
           </label>
         ))}
         
-        <p>Photo</p>
-        <div className="file">
-          <label className="file-label">
-            <input 
-              className="file-input" 
+        <p className="registration__label">Photo</p>
+        <div className="registration__file">
+          <label className="registration__file-label">
+            <input
+              className={classNames("registration__file-input", {"registration__file-input--error": !isFileValid})}
               type="file" 
               accept="image/png, image/jpeg" 
               onChange={async (event) => {
@@ -178,11 +179,14 @@ export const RegistrationSection = ({ addUser }) => {
                 }
               }}
             />
-            <span className="file-name">{file? file.name : 'Upload your photo'}</span>
-            <span className="file-cta"> Browse </span>
+            <div className="registration__fields-wrapper">
+              <span className="registration__file-name">{file ? file.name : 'Upload your photo'}</span>
+              <span className="registration__file-cta"> Browse </span>
+            </div>
           </label>
+          {!isFileValid && <p>Error</p>}
         </div>
-        {!isFileValid && <p>Error</p>}
+        
 
         <button type="submit" className="registration__button">Sign up now</button>
       </form>

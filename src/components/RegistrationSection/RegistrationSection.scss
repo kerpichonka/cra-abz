@@ -1,7 +1,7 @@
 .registration {
   padding: 105px 115px;
 
-  &__title{
+  &__title {
     text-align: center;
     margin-bottom: 30px;
   }
@@ -14,6 +14,45 @@
   &__form {
     display: flex;
     flex-direction: column;
+    width: 468px;
+    margin: 0 auto;
+  }
+
+  &__input {
+    outline: none;
+    padding: 0 10px 0;
+    width: 100%;
+    height: 40px;
+    border: 1px solid #b7bdc4;
+    border-radius: 5px;
+    font-size: 14px;
+
+    &::placeholder {
+      color: #b7bdc4;
+    }
+
+    &:focus,
+    &:active {
+      border-color: #96c9fe;
+      box-shadow: 0px 0px 2px 3px rgba(150, 201, 254, 0.2);
+    }
+  }
+
+  &__label {
+    margin-bottom: 10px;
+
+    &:not(:first-child) {
+      margin-top: 20px;
+    }
+  }
+
+  &__phone-mark {
+    color: #b7bdc4;
+    margin-bottom: 30px;
+  }
+
+  &__position {
+    margin-bottom: 30px;
   }
 
   &__button {
@@ -28,61 +67,94 @@
     border-width: 0;
     cursor: pointer;
   }
+
+  &__input--error,
+  &__input--error:focus,
+  &__input--error:active {
+    border: 1px solid red;
+  }
+
+  &__input--error:focus,
+  &__input--error:active {
+    box-shadow: 0px 0px 2px 3px rgba(255, 0, 0, 0.2);
+  }
+  
+  &__file {
+    user-select: none;
+    margin-bottom: 30px;
+  }
+  
+  &__file-label {
+    display: flex;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  &__file-input {
+    height: 100%;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    outline: 0;
+    position: absolute;
+    width: 100%;
+  }
+
+  &__fields-wrapper {
+    display: flex;
+    border: 1px solid #b7bdc4;
+    border-radius: 5px;
+    width: 100%;
+  }
+
+  &__file-name {
+    padding: 0 10px 0;
+    color: #b7bdc4;
+    width: 80%;
+  }
+  
+  &__file-cta {
+    flex-grow: 1;
+    justify-content: center;
+    padding-left: 1em;
+    padding-right: 1em;
+    border-radius: 0 5px 5px 0;
+    border-left: 1px solid #b7bdc4;
+    background-color: #f5f5f5;
+  }
+  
+  &__file-name,
+  &__file-cta {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    height: 38px;
+    line-height: 1.5;
+  }
+
+  &__file-input:focus ~ &__fields-wrapper,
+  &__file-input:active ~ &__fields-wrapper {
+    border: 1px solid #96c9fe;
+    box-shadow: 0px 0px 2px 3px rgba(150, 201, 254, 0.2);
+  }
+
+  &__file-input:focus ~ &__fields-wrapper &__file-cta,
+  &__file-input:active ~ &__fields-wrapper > &__file-cta {
+    border-left: 1px solid #96c9fe;;
+  }
+
+  &__file-input--error ~ &__fields-wrapper,
+  &__file-input--error:focus ~ &__fields-wrapper,
+  &__file-input--error:active ~ &__fields-wrapper {
+    border: 1px solid red;
+  }
+
+  &__file-input--error:focus ~ &__fields-wrapper,
+  &__file-input--error:active ~ &__fields-wrapper {
+    box-shadow: 0px 0px 2px 3px rgba(255, 0, 0, 0.2);
+
+  }
+
 }
 
-.input--error {
-  outline: none;
-  border: 2px solid red;
-}
 
-.file {
-  display: flex;
-
-  user-select: none;
-  position: relative;
-}
-
-.file-label {
-  align-items: stretch;
-  display: flex;
-  cursor: pointer;
-  justify-content: flex-start;
-  overflow: hidden;
-  position: relative;
-}
-
-.file-input {
-  height: 100%;
-  left: 0;
-  opacity: 0;
-  outline: 0;
-  position: absolute;
-  top: 0;
-  width: 100%;
-}
-
-.file-cta {
-  border-color: #dbdbdb;
-  border-radius: 0.375em;
-  font-size: 1em;
-  padding-left: 1em;
-  padding-right: 1em;
-  white-space: nowrap;
-  background-color: #f5f5f5;
-  color: #4a4a4a;
-}
-
-.file-name,
-.file-cta {
-  -webkit-appearance: none;
-  align-items: center;
-  border: 1px solid transparent;
-  border-radius: 0.375em;
-  box-shadow: none;
-  display: inline-flex;
-  font-size: 1rem;
-  height: 2.5em;
-  justify-content: flex-start;
-  line-height: 1.5;
-  position: relative;
-}
