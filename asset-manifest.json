@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/cra-abz/static/css/main.7f945e24.chunk.css",
+    "main.js": "/cra-abz/static/js/main.b70a5209.chunk.js",
+    "main.js.map": "/cra-abz/static/js/main.b70a5209.chunk.js.map",
+    "runtime-main.js": "/cra-abz/static/js/runtime-main.196e12fe.js",
+    "runtime-main.js.map": "/cra-abz/static/js/runtime-main.196e12fe.js.map",
+    "static/js/2.c49b1c7e.chunk.js": "/cra-abz/static/js/2.c49b1c7e.chunk.js",
+    "static/js/2.c49b1c7e.chunk.js.map": "/cra-abz/static/js/2.c49b1c7e.chunk.js.map",
+    "index.html": "/cra-abz/index.html",
+    "static/css/main.7f945e24.chunk.css.map": "/cra-abz/static/css/main.7f945e24.chunk.css.map",
+    "static/js/2.c49b1c7e.chunk.js.LICENSE.txt": "/cra-abz/static/js/2.c49b1c7e.chunk.js.LICENSE.txt",
+    "static/media/main.scss": "/cra-abz/static/media/OpenSans-Regular.1b0809d5.ttf",
+    "static/media/banner-photo.9614ebc2.jpg": "/cra-abz/static/media/banner-photo.9614ebc2.jpg",
+    "static/media/logo.d190168a.svg": "/cra-abz/static/media/logo.d190168a.svg",
+    "static/media/man-laptop-v1.bdb026ef.svg": "/cra-abz/static/media/man-laptop-v1.bdb026ef.svg",
+    "static/media/menu-icon.c551a7a2.svg": "/cra-abz/static/media/menu-icon.c551a7a2.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.196e12fe.js",
+    "static/js/2.c49b1c7e.chunk.js",
+    "static/css/main.7f945e24.chunk.css",
+    "static/js/main.b70a5209.chunk.js"
+  ]
+}
